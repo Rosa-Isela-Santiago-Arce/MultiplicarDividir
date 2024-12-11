@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class CalculadoraMultiplicacionDivision {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double resultado = 1; // Comenzamos con 1 para multiplicación
+        boolean continuar = true;
+
+        System.out.println("Bienvenido a la calculadora de multiplicación y división.");
+        System.out.println("Elige una operación: '*' para multiplicar, '/' para dividir.");
+        System.out.println("Escribe 'salir' para terminar el programa.");
+
+        while (continuar) {
+            System.out.println("\nResultado actual: " + resultado);
+            System.out.print("Ingresa una operación (* o /) o escribe 'salir': ");
+            String operacion = scanner.next();
+
+            if (operacion.equalsIgnoreCase("salir")) {
+                continuar = false;
+                System.out.println("Programa terminado. Resultado final: " + resultado);
+                break;
+            }
+
+            if (!operacion.equals("*") && !operacion.equals("/")) {
+                System.out.println("Operación no válida. Intenta de nuevo.");
+                continue;
+            }
+
+            System.out.print("Ingresa un número: ");
+            double numero;
+
+            // Validación de entrada
+            try {
+                numero = scanner.nextDouble();
+            } catch (Exception e) {
+                System.out.println("Entrada no válida. Por favor ingresa un número.");
+                scanner.next(); // Limpiar entrada inválida
+                continue;
+            }
+
+            // Realizar la operación
+            if (operacion.equals("*")) {
+                resultado *= numero;
+            } else if (operacion.equals("/")) {
+                if (numero == 0) {
+                    System.out.println("Error: No se puede dividir por cero.");
+                    continue;
+                }
+                resultado /= numero;
+            }
+        }
+
+        scanner.close();
+    }
+}
